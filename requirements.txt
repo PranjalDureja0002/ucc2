@@ -1,0 +1,6 @@
+pyodbc
+pandas
+openpyxl
+azure-storage-blob
+openai
+pymupdf
