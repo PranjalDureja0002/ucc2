@@ -9,7 +9,7 @@ Run: python 02_download_samples.py
 
 import os
 import re
-import pyodbc
+import pymssql
 import pandas as pd
 from azure.storage.blob import ContainerClient
 from config import BLOB_STORAGE, DB_CONFIG, OUTPUT_DIR, SAMPLE_SIZE
@@ -19,14 +19,13 @@ os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
 
 def get_db_connection():
-    conn_str = (
-        f"DRIVER={DB_CONFIG['driver']};"
-        f"SERVER={DB_CONFIG['server']};"
-        f"DATABASE={DB_CONFIG['database']};"
-        f"UID={DB_CONFIG['username']};"
-        f"PWD={DB_CONFIG['password']};"
+    return pymssql.connect(
+        server=DB_CONFIG["server"],
+        database=DB_CONFIG["database"],
+        user=DB_CONFIG["username"],
+        password=DB_CONFIG["password"],
+        login_timeout=30,
     )
-    return pyodbc.connect(conn_str, timeout=30)
 
 
 def get_blob_client():

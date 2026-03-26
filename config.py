@@ -31,8 +31,6 @@ AZURE_OPENAI = {
 DB_CONFIG = {
     "server": "rasmastertable.database.windows.net",
     "database": "rasmaster",
-    "driver": "{ODBC Driver 17 for SQL Server}",
-    "trusted_connection": False,
     "username": "YOUR_USERNAME",                      # <-- UPDATE THIS
     "password": "YOUR_PASSWORD",                      # <-- UPDATE THIS
 }

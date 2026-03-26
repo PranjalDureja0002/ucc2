@@ -1,4 +1,4 @@
-pyodbc
+pymssql
 pandas
 openpyxl
 azure-storage-blob

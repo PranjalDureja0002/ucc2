@@ -17,21 +17,20 @@ import os
 import json
 import glob
 import pandas as pd
-import pyodbc
+import pymssql
 from config import DB_CONFIG, OUTPUT_DIR
 
 EXTRACTED_DIR = os.path.join(OUTPUT_DIR, "extracted_jsons")
 
 
 def get_db_connection():
-    conn_str = (
-        f"DRIVER={DB_CONFIG['driver']};"
-        f"SERVER={DB_CONFIG['server']};"
-        f"DATABASE={DB_CONFIG['database']};"
-        f"UID={DB_CONFIG['username']};"
-        f"PWD={DB_CONFIG['password']};"
+    return pymssql.connect(
+        server=DB_CONFIG["server"],
+        database=DB_CONFIG["database"],
+        user=DB_CONFIG["username"],
+        password=DB_CONFIG["password"],
+        login_timeout=30,
     )
-    return pyodbc.connect(conn_str, timeout=30)
 
 
 def load_extracted_jsons():
